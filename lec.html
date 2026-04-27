@@ -90,7 +90,7 @@
         <input type="number" id="earthYears" placeholder="Enter Earth years...">
         <button onclick="calculate()">Calculate</button>
       </div>
-      <div id="planetGrid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 1rem;"></div>
+      <div id="planetGrid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 1.5rem;"></div>
     </div>
 
     <div class="sec">
@@ -112,9 +112,11 @@
         return;
       }
 
+      // Added Earth into the lineup!
       const planets = [
         { name: "Mercury", period: 0.2408, emoji: "☿️" },
         { name: "Venus", period: 0.6152, emoji: "♀️" },
+        { name: "Earth", period: 1.0000, emoji: "🌍" }, 
         { name: "Mars", period: 1.8808, emoji: "♂️" },
         { name: "Jupiter", period: 11.862, emoji: "♃" },
         { name: "Saturn", period: 29.447, emoji: "♄" },
@@ -125,18 +127,26 @@
       let html = '';
       planets.forEach(planet => {
         const planetAge = (earthAge / planet.period).toFixed(2);
+        
         html += `
-          <div class="detail-card" style="animation: fadeUp 0.4s ease forwards;">
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
-              <h3>${planet.name}</h3>
-              <span style="font-size: 1.2rem;">${planet.emoji}</span>
+          <div class="detail-card" style="animation: fadeUp 0.4s ease forwards; padding: 0; overflow: hidden; display: flex; flex-direction: column;">
+            <video src="videos/${planet.name}.mp4" 
+                   onerror="this.onerror=null; this.src='videos/na.mp4';" 
+                   style="width: 100%; aspect-ratio: 16/9; object-fit: cover; background: #000; border-bottom: 1px solid var(--border);" 
+                   autoplay loop muted playsinline preload="auto">
+            </video>
+            <div style="padding: 1.5rem;">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+                <h3 style="margin: 0;">${planet.name}</h3>
+                <span style="font-size: 1.2rem;">${planet.emoji}</span>
+              </div>
+              <p style="font-family: 'Noto Sans Mono', monospace; font-size: 1.1rem; font-weight: 700;">
+                ${planetAge} <span style="font-size: 0.7rem; color: var(--muted);">years old</span>
+              </p>
+              <p style="font-size: 0.7rem; color: var(--muted); margin-top: 0.5rem; border-top: 1px solid var(--border); padding-top: 0.5rem;">
+                1 Year = ${planet.period} Earth yrs
+              </p>
             </div>
-            <p style="font-family: 'Noto Sans Mono', monospace; font-size: 1.1rem; font-weight: 700;">
-              ${planetAge} <span style="font-size: 0.7rem; color: var(--muted);">years old</span>
-            </p>
-            <p style="font-size: 0.7rem; color: var(--muted); margin-top: 0.5rem; border-top: 1px solid var(--border); padding-top: 0.5rem;">
-              1 Year = ${planet.period} Earth yrs
-            </p>
           </div>
         `;
       });
