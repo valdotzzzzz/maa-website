@@ -8,62 +8,273 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700;800&family=Noto+Sans+Mono:wght@400;600&display=swap" rel="stylesheet">
   <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    :root {
-      --bg:      #f5f5f5;
-      --surface: #ffffff;
-      --border:  #e0e0e0;
-      --accent:  #008a3d;
-      --text:    #111111;
-      --muted:   #4a4a4a;
+    /* CSS Variables & Reset */
+    *, *::before, *::after { 
+      box-sizing: border-box; 
+      margin: 0; 
+      padding: 0; 
     }
-    body { background: var(--bg); color: var(--text); font-family: 'Noto Sans', sans-serif; line-height: 1.6; }
-    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 1.1rem 2.5rem; background: rgba(245, 245, 245, 0.95); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); }
-    .nav-logo { font-weight: 800; font-size: 1.1rem; color: var(--text); text-decoration: none; }
-    
-    .wrap { max-width: 900px; margin: 0 auto; padding: 8rem 2.5rem 5rem; }
-    .back-link { display: inline-flex; align-items: center; gap: 0.4rem; font-size: 0.85rem; color: var(--muted); text-decoration: none; font-weight: 700; margin-bottom: 2rem; }
-    .proj-title { font-size: clamp(2.2rem, 5vw, 3.8rem); font-weight: 800; letter-spacing: -0.03em; margin-bottom: 1.5rem; }
 
-    .video-container { position: relative; width: 100%; aspect-ratio: 16/9; background: #000; border-radius: 4px; overflow: hidden; border: 1px solid var(--border); margin-bottom: 4rem; }
-    .video-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
+    :root {
+      --bg: #f5f5f5;
+      --surface: #ffffff;
+      --border: #e0e0e0;
+      --accent: #008a3d;
+      --text: #111111;
+      --muted: #4a4a4a;
+    }
 
-    .sec { border-top: 2px solid var(--text); margin-bottom: 3rem; padding-top: 2rem; }
-    .sec-label { font-size: 0.75rem; text-transform: uppercase; color: var(--muted); font-weight: 800; margin-bottom: 2.5rem; display: block; }
-    
-    .details-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.5rem; margin-bottom: 4rem; }
-    .detail-card { background: var(--surface); border: 1px solid var(--border); border-radius: 4px; padding: 1.5rem; }
-    .detail-card h3 { font-size: 0.85rem; text-transform: uppercase; color: var(--accent); margin-bottom: 1rem; font-weight: 800; }
-    .detail-card ul { list-style: none; font-size: 0.9rem; }
+    body { 
+      background-color: var(--bg); 
+      color: var(--text); 
+      font-family: 'Noto Sans', sans-serif; 
+      line-height: 1.6; 
+    }
 
-    .calc-box { background: var(--surface); border: 1px solid var(--border); border-radius: 4px; padding: 2rem; margin-bottom: 4rem; }
-    .calc-row { display: flex; gap: 1rem; margin-bottom: 2rem; }
-    .calc-row input { flex: 1; background: var(--bg); border: 1px solid var(--border); padding: 0.8rem 1.2rem; font-family: 'Noto Sans Mono', monospace; outline: none;}
-    .calc-row button { background: var(--text); color: var(--surface); border: none; cursor: pointer; padding: 0 2rem; font-weight: 700; }
+    /* Navigation */
+    nav { 
+      position: fixed; 
+      top: 0; 
+      left: 0; 
+      right: 0; 
+      z-index: 100; 
+      display: flex; 
+      align-items: center; 
+      justify-content: space-between; 
+      padding: 1.1rem 2.5rem; 
+      background-color: rgba(245, 245, 245, 0.95); 
+      -webkit-backdrop-filter: blur(12px);
+      backdrop-filter: blur(12px); 
+      border-bottom: 1px solid var(--border); 
+    }
 
-    /* New Celestial List Styles */
-    .celestial-list { display: flex; flex-direction: column; gap: 1.5rem; margin-bottom: 4rem; }
-    .celestial-row { background: var(--surface); border: 1px solid var(--border); border-radius: 4px; display: grid; grid-template-columns: 280px 1fr; overflow: hidden; }
-    .celestial-vid { width: 100%; aspect-ratio: 16/9; background: #000; border-right: 1px solid var(--border); object-fit: cover; }
-    .celestial-info { padding: 1.5rem 2rem; display: flex; flex-direction: column; justify-content: center; }
-    .celestial-info h3 { font-size: 1.4rem; font-weight: 800; margin-bottom: 0.2rem; letter-spacing: -0.02em; }
-    .celestial-meta { font-family: 'Noto Sans Mono', monospace; font-size: 0.8rem; color: var(--accent); margin-bottom: 1rem; text-transform: uppercase; font-weight: 600; }
-    .celestial-desc { font-size: 0.95rem; color: var(--muted); line-height: 1.5; }
+    .nav-logo { 
+      font-weight: 800; 
+      font-size: 1.1rem; 
+      color: var(--text); 
+      text-decoration: none; 
+    }
 
-    .log-container { display: flex; flex-direction: column; gap: 1.5rem; }
-    .week-entry { background: var(--surface); border: 1px solid var(--border); border-radius: 4px; display: grid; grid-template-columns: 100px 1fr; overflow: hidden; }
-    .week-meta { background: #fafafa; border-right: 1px solid var(--border); padding: 1.5rem; display: flex; align-items: flex-start; justify-content: center; }
-    .week-num { font-weight: 800; font-size: 0.85rem; color: var(--accent); text-transform: uppercase; margin-top: 5px; }
-    .week-content { padding: 1.5rem 2rem; }
-    .week-video-embed { width: 100%; aspect-ratio: 16/9; background: #eee; border-radius: 2px; overflow: hidden; border: 1px solid var(--border); }
+    /* Layout Wrapper */
+    .wrap { 
+      max-width: 900px; 
+      margin: 0 auto; 
+      padding: 8rem 2.5rem 5rem; 
+    }
 
-    footer { border-top: 1px solid var(--border); padding: 3rem 2.5rem; text-align: center; font-size: 0.85rem; color: var(--muted); background: var(--surface); }
+    .back-link { 
+      display: inline-flex; 
+      align-items: center; 
+      gap: 0.4rem; 
+      font-size: 0.85rem; 
+      color: var(--muted); 
+      text-decoration: none; 
+      font-weight: 700; 
+      margin-bottom: 2rem; 
+    }
 
+    .proj-title { 
+      font-size: 2.2rem; /* Static fallback for older validators */
+      font-size: clamp(2.2rem, 5vw, 3.8rem); 
+      font-weight: 800; 
+      letter-spacing: -0.03em; 
+      margin-bottom: 1.5rem; 
+    }
+
+    /* Sections */
+    .sec { 
+      border-top: 2px solid var(--text); 
+      margin-bottom: 3rem; 
+      padding-top: 2rem; 
+    }
+
+    .sec-label { 
+      font-size: 0.75rem; 
+      text-transform: uppercase; 
+      color: var(--muted); 
+      font-weight: 800; 
+      margin-bottom: 2.5rem; 
+      display: block; 
+    }
+
+    /* Technical Grid */
+    .details-grid { 
+      display: grid; 
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); 
+      gap: 1.5rem; 
+      margin-bottom: 4rem; 
+    }
+
+    .detail-card { 
+      background-color: var(--surface); 
+      border: 1px solid var(--border); 
+      border-radius: 4px; 
+      padding: 1.5rem; 
+    }
+
+    .detail-card h3 { 
+      font-size: 0.85rem; 
+      text-transform: uppercase; 
+      color: var(--accent); 
+      margin-bottom: 1rem; 
+      font-weight: 800; 
+    }
+
+    .detail-card ul { 
+      list-style: none; 
+      font-size: 0.9rem; 
+    }
+
+    /* Calculator Styling */
+    .calc-box { 
+      background-color: var(--surface); 
+      border: 1px solid var(--border); 
+      border-radius: 4px; 
+      padding: 2rem; 
+      margin-bottom: 4rem; 
+    }
+
+    .calc-row { 
+      display: flex; 
+      gap: 1rem; 
+      margin-bottom: 2rem; 
+    }
+
+    .calc-row input { 
+      flex: 1; 
+      background-color: var(--bg); 
+      border: 1px solid var(--border); 
+      padding: 0.8rem 1.2rem; 
+      font-family: 'Noto Sans Mono', monospace; 
+      outline: none;
+    }
+
+    .calc-row button { 
+      background-color: var(--text); 
+      color: var(--surface); 
+      border: none; 
+      cursor: pointer; 
+      padding: 0 2rem; 
+      font-weight: 700; 
+    }
+
+    /* Celestial Bodies List */
+    .celestial-list { 
+      display: flex; 
+      flex-direction: column; 
+      gap: 1.5rem; 
+      margin-bottom: 4rem; 
+    }
+
+    .celestial-row { 
+      background-color: var(--surface); 
+      border: 1px solid var(--border); 
+      border-radius: 4px; 
+      display: grid; 
+      grid-template-columns: 280px 1fr; 
+      overflow: hidden; 
+    }
+
+    .celestial-vid { 
+      width: 100%; 
+      aspect-ratio: 16/9; 
+      background-color: #000; 
+      border-right: 1px solid var(--border); 
+      object-fit: cover; 
+    }
+
+    .celestial-info { 
+      padding: 1.5rem 2rem; 
+      display: flex; 
+      flex-direction: column; 
+      justify-content: center; 
+    }
+
+    .celestial-info h3 { 
+      font-size: 1.4rem; 
+      font-weight: 800; 
+      margin-bottom: 0.2rem; 
+      letter-spacing: -0.02em; 
+    }
+
+    .celestial-meta { 
+      font-family: 'Noto Sans Mono', monospace; 
+      font-size: 0.8rem; 
+      color: var(--accent); 
+      margin-bottom: 1rem; 
+      text-transform: uppercase; 
+      font-weight: 600; 
+    }
+
+    .celestial-desc { 
+      font-size: 0.95rem; 
+      color: var(--muted); 
+      line-height: 1.5; 
+    }
+
+    /* Development Log */
+    .log-container { 
+      display: flex; 
+      flex-direction: column; 
+      gap: 1.5rem; 
+    }
+
+    .week-entry { 
+      background-color: var(--surface); 
+      border: 1px solid var(--border); 
+      border-radius: 4px; 
+      display: grid; 
+      grid-template-columns: 100px 1fr; 
+      overflow: hidden; 
+    }
+
+    .week-meta { 
+      background-color: #fafafa; 
+      border-right: 1px solid var(--border); 
+      padding: 1.5rem; 
+      display: flex; 
+      align-items: flex-start; 
+      justify-content: center; 
+    }
+
+    .week-num { 
+      font-weight: 800; 
+      font-size: 0.85rem; 
+      color: var(--accent); 
+      text-transform: uppercase; 
+      margin-top: 5px; 
+    }
+
+    .week-content { 
+      padding: 1.5rem 2rem; 
+    }
+
+    .week-video-embed { 
+      width: 100%; 
+      aspect-ratio: 16/9; 
+      background-color: #eee; 
+      border-radius: 2px; 
+      overflow: hidden; 
+      border: 1px solid var(--border); 
+    }
+
+    /* Footer */
+    footer { 
+      border-top: 1px solid var(--border); 
+      padding: 3rem 2.5rem; 
+      text-align: center; 
+      font-size: 0.85rem; 
+      color: var(--muted); 
+      background-color: var(--surface); 
+    }
+
+    /* Animations */
     @keyframes fadeUp {
       from { opacity: 0; transform: translateY(10px); }
-      to   { opacity: 1; transform: translateY(0); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
+    /* Responsive */
     @media (max-width: 650px) {
       .week-entry { grid-template-columns: 1fr; }
       .week-meta { border-right: none; border-bottom: 1px solid var(--border); padding: 1rem; }
@@ -205,83 +416,87 @@
   <footer>Gean Clyde H. Valdez · BSIT-S-2A</footer>
 
   <script>
-    // Age Calculator Logic
-    function calculate() {
+  function calculate() {
       const earthAge = document.getElementById('earthYears').value;
       const grid = document.getElementById('planetGrid');
-      
+
       if (!earthAge || earthAge <= 0) {
-        grid.innerHTML = '<p style="color: var(--muted); font-size: 0.85rem; padding: 1rem;">Please enter a valid age.</p>';
-        return;
+          grid.innerHTML = '<p style="color: var(--muted); font-size: 0.85rem; padding: 1rem;">Please enter a valid age.</p>';
+          return;
       }
 
       const planets = [
-        { name: "Mercury", period: 0.2408, emoji: "☿️" },
-        { name: "Venus", period: 0.6152, emoji: "♀️" },
-        { name: "Earth", period: 1.0000, emoji: "🌍" }, 
-        { name: "Mars", period: 1.8808, emoji: "♂️" },
-        { name: "Jupiter", period: 11.862, emoji: "♃" },
-        { name: "Saturn", period: 29.447, emoji: "♄" },
-        { name: "Uranus", period: 84.016, emoji: "⛢" },
-        { name: "Neptune", period: 164.79, emoji: "♆" }
+          { name: "Mercury", period: 0.2408, emoji: "☿️" },
+          { name: "Venus", period: 0.6152, emoji: "♀️" },
+          { name: "Earth", period: 1.0000, emoji: "🌍" },
+          { name: "Mars", period: 1.8808, emoji: "♂️" },
+          { name: "Jupiter", period: 11.862, emoji: "♃" },
+          { name: "Saturn", period: 29.447, emoji: "♄" },
+          { name: "Uranus", period: 84.016, emoji: "⛢" },
+          { name: "Neptune", period: 164.79, emoji: "♆" }
       ];
 
       let html = '';
       planets.forEach(planet => {
-        const planetAge = (earthAge / planet.period).toFixed(2);
-        
-        html += `
-          <div class="detail-card" style="animation: fadeUp 0.4s ease forwards; padding: 0; overflow: hidden; display: flex; flex-direction: column;">
-            <video src="videos/${planet.name}.mp4" 
-                   onerror="this.onerror=null; this.src='videos/na.mp4';" 
-                   style="width: 100%; aspect-ratio: 16/9; object-fit: cover; background: #000; border-bottom: 1px solid var(--border);" 
-                   autoplay loop muted playsinline preload="auto">
-            </video>
-            <div style="padding: 1.5rem;">
-              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
-                <h3 style="margin: 0;">${planet.name}</h3>
-                <span style="font-size: 1.2rem;">${planet.emoji}</span>
+          const planetAge = (earthAge / planet.period).toFixed(2);
+
+          html += `
+            <div class="detail-card" style="animation: fadeUp 0.4s ease forwards; padding: 0; overflow: hidden; display: flex; flex-direction: column;">
+              <video src="videos/${planet.name}.mp4" 
+                    onerror="this.onerror=null; this.src='videos/na.mp4';" 
+                    style="width: 100%; aspect-ratio: 16/9; object-fit: cover; background-color: #000; border-bottom: 1px solid var(--border);" 
+                    autoplay loop muted playsinline preload="auto">
+              </video>
+              <div style="padding: 1.5rem;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+                  <h3 style="margin: 0;">${planet.name}</h3>
+                  <span style="font-size: 1.2rem;">${planet.emoji}</span>
+                </div>
+                <p style="font-family: 'Noto Sans Mono', monospace; font-size: 1.1rem; font-weight: 700;">
+                  ${planetAge} <span style="font-size: 0.7rem; color: var(--muted);">years old</span>
+                </p>
+                <p style="font-size: 0.7rem; color: var(--muted); margin-top: 0.5rem; border-top: 1px solid var(--border); padding-top: 0.5rem;">
+                  1 Year = ${planet.period} Earth yrs
+                </p>
               </div>
-              <p style="font-family: 'Noto Sans Mono', monospace; font-size: 1.1rem; font-weight: 700;">
-                ${planetAge} <span style="font-size: 0.7rem; color: var(--muted);">years old</span>
-              </p>
-              <p style="font-size: 0.7rem; color: var(--muted); margin-top: 0.5rem; border-top: 1px solid var(--border); padding-top: 0.5rem;">
-                1 Year = ${planet.period} Earth yrs
-              </p>
+            </div>
+          `;
+      });
+      grid.innerHTML = html;
+  }
+
+  // Development Log Generation
+  const weeklyVideos = {
+      1: "videos/Earth.mp4",
+      2: "videos/Mercury.mp4"
+  };
+
+  const container = document.getElementById('log-container');
+  let logHTML = '';
+
+  for (let i = 1; i <= 12; i++) {
+      const videoPath = weeklyVideos[i] || "videos/na.mp4";
+      logHTML += `
+          <div class="week-entry">
+            <div class="week-meta">
+              <span class="week-num">Week ${i}</span>
+            </div>
+            <div class="week-content">
+              <div class="week-video-embed">
+                <video style="width: 100%; height: 100%; background-color: #000; display: block;" 
+                       autoplay loop muted playsinline preload="auto">
+                  <source src="${videoPath}" type="video/mp4">
+                  Your browser does not support the video tag.
+                </video>
+              </div>
             </div>
           </div>
         `;
-      });
-      grid.innerHTML = html;
-    }
+  }
 
-    // Development Log Generation
-    const weeklyVideos = { 1: "videos/Earth.mp4",
-                           2: "videos/Mercury.mp4"
-     };
-    const container = document.getElementById('log-container');
-    let logHTML = '';
-    
-    for (let i = 1; i <= 12; i++) {
-      const videoPath = weeklyVideos[i] || "videos/na.mp4";
-      logHTML += `
-        <div class="week-entry">
-          <div class="week-meta">
-            <span class="week-num">Week ${i}</span>
-          </div>
-          <div class="week-content">
-            <div class="week-video-embed">
-              <video style="width: 100%; height: 100%; background: #000; display: block;" 
-                     autoplay loop muted playsinline preload="auto">
-                <source src="${videoPath}" type="video/mp4">
-                Your browser does not support the video tag.
-              </video>
-            </div>
-          </div>
-        </div>
-      `;
-    }
-    if (container) container.innerHTML = logHTML;
+  if (container) {
+      container.innerHTML = logHTML;
+  }
   </script>
 </body>
 </html>

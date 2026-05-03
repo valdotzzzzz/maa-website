@@ -8,52 +8,234 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    :root {
-      --bg:      #f5f5f5;
-      --surface: #ffffff;
-      --border:  #e0e0e0;
-      --accent:  #008a3d;
-      --text:    #111111;
-      --muted:   #4a4a4a;
+    /* CSS Reset & Variables */
+    *, *::before, *::after { 
+      box-sizing: border-box; 
+      margin: 0; 
+      padding: 0; 
     }
-    body { background: var(--bg); color: var(--text); font-family: 'Noto Sans', sans-serif; line-height: 1.6; }
-    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 1.1rem 2.5rem; background: rgba(245, 245, 245, 0.95); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); }
-    .nav-logo { font-weight: 800; font-size: 1.1rem; color: var(--text); text-decoration: none; }
-    
-    .wrap { max-width: 900px; margin: 0 auto; padding: 8rem 2.5rem 5rem; }
-    .back-link { display: inline-flex; align-items: center; gap: 0.4rem; font-size: 0.85rem; color: var(--muted); text-decoration: none; font-weight: 700; margin-bottom: 2rem; }
-    .proj-title { font-size: clamp(2.2rem, 5vw, 3.8rem); font-weight: 800; letter-spacing: -0.03em; margin-bottom: 1.5rem; }
 
-    .video-container { position: relative; width: 100%; aspect-ratio: 16/9; background: #000; border-radius: 4px; overflow: hidden; border: 1px solid var(--border); margin-bottom: 4rem; }
-    .video-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
+    :root {
+      --bg: #f5f5f5;
+      --surface: #ffffff;
+      --border: #e0e0e0;
+      --accent: #008a3d;
+      --text: #111111;
+      --muted: #4a4a4a;
+    }
 
-    .sec { border-top: 2px solid var(--text); margin-bottom: 3rem; padding-top: 2rem; }
-    .sec h2 { font-size: 0.75rem; text-transform: uppercase; color: var(--muted); font-weight: 800; margin-bottom: 2.5rem; display: block; }
-    
-    .details-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.5rem; margin-bottom: 4rem; }
-    .detail-card { background: var(--surface); border: 1px solid var(--border); border-radius: 4px; padding: 1.5rem; }
-    .detail-card h3 { font-size: 0.85rem; text-transform: uppercase; color: var(--accent); margin-bottom: 1rem; font-weight: 800; }
-    .detail-card ul { list-style: none; font-size: 0.9rem; }
+    body { 
+      background-color: var(--bg); 
+      color: var(--text); 
+      font-family: 'Noto Sans', sans-serif; 
+      line-height: 1.6; 
+    }
 
-    .log-container { display: flex; flex-direction: column; gap: 1.5rem; }
-    .week-entry { background: var(--surface); border: 1px solid var(--border); border-radius: 4px; display: grid; grid-template-columns: 100px 1fr; overflow: hidden; }
-    .week-meta { background: #fafafa; border-right: 1px solid var(--border); padding: 1.5rem; display: flex; align-items: flex-start; justify-content: center; }
-    .week-num { font-weight: 800; font-size: 0.85rem; color: var(--accent); text-transform: uppercase; margin-top: 5px; }
-    .week-content { padding: 1.5rem 2rem; }
+    /* Navigation */
+    nav { 
+      position: fixed; 
+      top: 0; 
+      left: 0; 
+      right: 0; 
+      z-index: 100; 
+      display: flex; 
+      align-items: center; 
+      justify-content: space-between; 
+      padding: 1.1rem 2.5rem; 
+      background-color: rgba(245, 245, 245, 0.95); 
+      -webkit-backdrop-filter: blur(12px);
+      backdrop-filter: blur(12px); 
+      border-bottom: 1px solid var(--border); 
+    }
 
-    .week-video-embed { width: 100%; aspect-ratio: 16/9; background: #eee; border-radius: 2px; overflow: hidden; border: 1px solid var(--border); }
-    .week-video-embed iframe { width: 100%; height: 100%; border: 0; }
+    .nav-logo { 
+      font-weight: 800; 
+      font-size: 1.1rem; 
+      color: var(--text); 
+      text-decoration: none; 
+    }
 
-    footer { border-top: 1px solid var(--border); padding: 3rem 2.5rem; text-align: center; font-size: 0.85rem; color: var(--muted); background: var(--surface); }
+    /* Layout Wrapper */
+    .wrap { 
+      max-width: 900px; 
+      margin: 0 auto; 
+      padding: 8rem 2.5rem 5rem; 
+    }
 
+    .back-link { 
+      display: inline-flex; 
+      align-items: center; 
+      gap: 0.4rem; 
+      font-size: 0.85rem; 
+      color: var(--muted); 
+      text-decoration: none; 
+      font-weight: 700; 
+      margin-bottom: 2rem; 
+    }
+
+    .proj-title { 
+      font-size: 2.2rem; /* Fallback for older browsers */
+      font-size: clamp(2.2rem, 5vw, 3.8rem); 
+      font-weight: 800; 
+      letter-spacing: -0.03em; 
+      margin-bottom: 1.5rem; 
+    }
+
+    /* Video Display */
+    .video-container { 
+      position: relative; 
+      width: 100%; 
+      aspect-ratio: 16/9; 
+      background-color: #000; 
+      border-radius: 4px; 
+      overflow: hidden; 
+      border: 1px solid var(--border); 
+      margin-bottom: 4rem; 
+    }
+
+    .video-container iframe { 
+      position: absolute; 
+      top: 0; 
+      left: 0; 
+      width: 100%; 
+      height: 100%; 
+      border: 0; 
+    }
+
+    /* Section Styling */
+    .sec { 
+      border-top: 2px solid var(--text); 
+      margin-bottom: 3rem; 
+      padding-top: 2rem; 
+    }
+
+    .sec h2 { 
+      font-size: 0.75rem; 
+      text-transform: uppercase; 
+      color: var(--muted); 
+      font-weight: 800; 
+      margin-bottom: 2.5rem; 
+      display: block; 
+    }
+
+    /* Details Grid */
+    .details-grid { 
+      display: grid; 
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); 
+      gap: 1.5rem; 
+      margin-bottom: 4rem; 
+    }
+
+    .detail-card { 
+      background-color: var(--surface); 
+      border: 1px solid var(--border); 
+      border-radius: 4px; 
+      padding: 1.5rem; 
+    }
+
+    .detail-card h3 { 
+      font-size: 0.85rem; 
+      text-transform: uppercase; 
+      color: var(--accent); 
+      margin-bottom: 1rem; 
+      font-weight: 800; 
+    }
+
+    .detail-card ul { 
+      list-style: none; 
+      font-size: 0.9rem; 
+    }
+
+    /* Dev Log Entry */
+    .log-container { 
+      display: flex; 
+      flex-direction: column; 
+      gap: 1.5rem; 
+    }
+
+    .week-entry { 
+      background-color: var(--surface); 
+      border: 1px solid var(--border); 
+      border-radius: 4px; 
+      display: grid; 
+      grid-template-columns: 100px 1fr; 
+      overflow: hidden; 
+    }
+
+    .week-meta { 
+      background-color: #fafafa; 
+      border-right: 1px solid var(--border); 
+      padding: 1.5rem; 
+      display: flex; 
+      align-items: flex-start; 
+      justify-content: center; 
+    }
+
+    .week-num { 
+      font-weight: 800; 
+      font-size: 0.85rem; 
+      color: var(--accent); 
+      text-transform: uppercase; 
+      margin-top: 5px; 
+    }
+
+    .week-content { 
+      padding: 1.5rem 2rem; 
+    }
+
+    .week-video-embed { 
+      width: 100%; 
+      aspect-ratio: 16/9; 
+      background-color: #eee; 
+      border-radius: 2px; 
+      overflow: hidden; 
+      border: 1px solid var(--border); 
+    }
+
+    .week-video-embed iframe { 
+      width: 100%; 
+      height: 100%; 
+      border: 0; 
+    }
+
+    .disclaimer-box {
+      background-color: #fdfdfd;
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--accent); 
+      padding: 1.2rem 1.5rem; 
+      margin-bottom: 3rem; 
+      border-radius: 4px; 
+    }
+
+    .disclaimer-box p {
+      font-size: 0.85rem; 
+      color: var(--muted);
+      line-height: 1.5; 
+    }
+
+    .disclaimer-box strong {
+      color: var(--text);
+      text-transform: uppercase;
+      font-size: 0.75rem;
+      letter-spacing: 0.05em;
+      display: block;
+      margin-bottom: 0.4rem;
+    }
+
+    footer { 
+      border-top: 1px solid var(--border); 
+      padding: 3rem 2.5rem; 
+      text-align: center; 
+      font-size: 0.85rem; 
+      color: var(--muted); 
+      background-color: var(--surface); 
+    }
+
+    /* Responsive adjustments */
     @media (max-width: 600px) {
       .week-entry { grid-template-columns: 1fr; }
       .week-meta { border-right: none; border-bottom: 1px solid var(--border); padding: 1rem; }
     }
-    .disclaimer-box {background: #fdfdfd;border: 1px solid var(--border);border-left: 4px solid var(--accent); padding: 1.2rem 1.5rem; margin-bottom: 3rem; border-radius: 4px; }
-    .disclaimer-box p {font-size: 0.85rem; color: var(--muted);line-height: 1.5; }
-    .disclaimer-box strong {color: var(--text);text-transform: uppercase;font-size: 0.75rem;letter-spacing: 0.05em;display: block;margin-bottom: 0.4rem;}
   </style>
 </head>
 <body>
@@ -68,6 +250,7 @@
     <div class="video-container">
       <iframe src="https://www.youtube.com/embed/ZiYtg9HleNA" title="Featured Rotoscope Project" allowfullscreen></iframe>
     </div>
+
     <div class="disclaimer-box">
       <strong>Reference Content Notice</strong>
       <p>
@@ -75,6 +258,7 @@
         It is featured here for educational and informational purposes only. 
       </p>
     </div>
+
     <div class="sec">
       <h2>Technical Specifications</h2>
       <div class="details-grid">
@@ -100,6 +284,7 @@
   <script>
     const weeklyVideos = {
       1: "QqotXgcu3Ac",
+      2: "TAUu4Gv25a0",
     };
 
     const container = document.getElementById('log-container');
