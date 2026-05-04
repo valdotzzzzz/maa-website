@@ -74,7 +74,6 @@
     }
 
     .proj-title { 
-      font-size: 2.2rem; /* Static fallback for older validators */
       font-size: clamp(2.2rem, 5vw, 3.8rem); 
       font-weight: 800; 
       letter-spacing: -0.03em; 
@@ -212,6 +211,38 @@
       line-height: 1.5; 
     }
 
+    /* Resource Download Styles */
+    .download-link {
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.85rem;
+      display: inline-block;
+      margin-top: 0.5rem;
+    }
+    .download-link:hover { text-decoration: underline; }
+
+    /* Code Editor Styles */
+    .code-editor-container {
+      background: #1e1e1e;
+      border-radius: 4px;
+      padding: 1.5rem;
+      margin-top: 1rem;
+    }
+
+    #pythonScript {
+      width: 100%;
+      height: 300px;
+      background: transparent;
+      color: #dcdcdc;
+      border: none;
+      outline: none;
+      font-family: 'Noto Sans Mono', monospace;
+      font-size: 0.85rem;
+      line-height: 1.6;
+      resize: vertical;
+    }
+
     /* Development Log */
     .log-container { 
       display: flex; 
@@ -258,16 +289,6 @@
       border: 1px solid var(--border); 
     }
 
-    /* Footer */
-    footer { 
-      border-top: 1px solid var(--border); 
-      padding: 3rem 2.5rem; 
-      text-align: center; 
-      font-size: 0.85rem; 
-      color: var(--muted); 
-      background-color: var(--surface); 
-    }
-
     /* Animations */
     @keyframes fadeUp {
       from { opacity: 0; transform: translateY(10px); }
@@ -291,6 +312,7 @@
     <p style="font-size: 0.75rem; font-weight: 700; color: var(--muted); text-transform: uppercase;">Lecture</p>
     <h1 class="proj-title">3D Solar System</h1>
 
+    <!-- TECHNICAL SPECS -->
     <div class="sec">
       <h2 class="sec-label">Technical Specifications</h2>
       <div class="details-grid">
@@ -301,15 +323,18 @@
       </div>
     </div>
 
+    <!-- PLANETARY CALCULATOR -->
     <div class="calc-box">
       <h2 style="font-size: 1.2rem; font-weight: 800; margin-bottom: 0.5rem;">Planetary Data Calculator</h2>
+      <p style="font-size: 0.85rem; color: var(--muted); margin-bottom: 1.5rem;">Enter your age in Earth years to see how long you've been alive on other planets.</p>
       <div class="calc-row">
-        <input type="number" id="earthYears" placeholder="Enter Earth years...">
+        <input type="number" id="earthYears" placeholder="e.g., 20">
         <button onclick="calculate()">Calculate</button>
       </div>
       <div id="planetGrid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 1.5rem;"></div>
     </div>
 
+    <!-- CELESTIAL BODIES OVERVIEW -->
     <div class="sec">
       <h2 class="sec-label">Celestial Bodies Overview</h2>
       <div class="celestial-list">
@@ -319,7 +344,7 @@
           <div class="celestial-info">
             <h3>Sun</h3>
             <div class="celestial-meta">Star • Yellow Dwarf</div>
-            <p class="celestial-desc">A nearly perfect sphere of hot plasma at the center of our solar system, driving weather, ocean currents, seasons, and making life on Earth possible.</p>
+            <p class="celestial-desc">A nearly perfect sphere of hot plasma at the center of our solar system, driving weather, seasons, and making life on Earth possible.</p>
           </div>
         </div>
 
@@ -333,11 +358,11 @@
         </div>
 
         <div class="celestial-row">
-          <video class="celestial-vid" src="videos/na.mp4" autoplay loop muted playsinline preload="auto"></video>
+          <video class="celestial-vid" src="videos/Venus.mp4" autoplay loop muted playsinline preload="auto"></video>
           <div class="celestial-info">
             <h3>Venus</h3>
             <div class="celestial-meta">Terrestrial Planet • 2nd from Sun</div>
-            <p class="celestial-desc">Earth's "sister planet" is characterized by a thick, toxic atmosphere filled with carbon dioxide, making it the hottest planet in the solar system.</p>
+            <p class="celestial-desc">Earth's "sister planet" characterized by a thick, toxic atmosphere filled with carbon dioxide, making it the hottest planet in the solar system.</p>
           </div>
         </div>
 
@@ -347,15 +372,6 @@
             <h3>Earth</h3>
             <div class="celestial-meta">Terrestrial Planet • 3rd from Sun</div>
             <p class="celestial-desc">Our home planet. It is a water-rich world and currently the only known celestial body in the universe to harbor life.</p>
-          </div>
-        </div>
-
-        <div class="celestial-row">
-          <video class="celestial-vid" src="videos/na.mp4" autoplay loop muted playsinline preload="auto"></video>
-          <div class="celestial-info">
-            <h3>Earth's Moon</h3>
-            <div class="celestial-meta">Natural Satellite</div>
-            <p class="celestial-desc">Earth's only natural satellite. Its gravitational pull causes ocean tides, stabilizes Earth's wobble, and dictates our seasons.</p>
           </div>
         </div>
 
@@ -404,99 +420,159 @@
           </div>
         </div>
 
+        <div class="celestial-row">
+          <video class="celestial-vid" src="videos/na.mp4" onerror="this.onerror=null; this.src='videos/na.mp4';" autoplay loop muted playsinline preload="auto"></video>
+          <div class="celestial-info">
+            <h3>Pluto</h3>
+            <div class="celestial-meta">Dwarf Planet • Kuiper Belt</div>
+            <p class="celestial-desc">Once classified as the ninth planet, Pluto is a complex world of frozen nitrogen and ice mountains. It resides in the Kuiper Belt, a vast region of icy objects beyond the orbit of Neptune.</p>
+          </div>
+        </div>
+
       </div>
     </div>
 
+    <!-- RESOURCE DOWNLOADS -->
+    <div class="sec">
+      <h2 class="sec-label">Resource Downloads</h2>
+      <div class="details-grid">
+        <div class="detail-card">
+          <h3>Mercury</h3>
+          <ul><li><a href="resources/2k_mercury.jpg" download class="download-link">↓ 2k_mercury.jpg</a></li></ul>
+        </div>
+        <div class="detail-card">
+          <h3>Venus</h3>
+          <ul><li><a href="resources/8k_venus_surface.jpg" download class="download-link">↓ 8k_venus_surface.jpg</a></li></ul>
+        </div>
+        <div class="detail-card">
+          <h3>Earth</h3>
+          <ul>
+            <li><a href="resources/2k_earth_daymap.jpg" download class="download-link">↓ 2k_earth_daymap.jpg</a></li>
+            <li><a href="resources/2k_earth_normal_map.tif" download class="download-link">↓ 2k_earth_normal_map.tif</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- PYTHON SCRIPTING -->
+    <div class="sec">
+      <h2 class="sec-label">Blender Automation Script</h2>
+      <div class="calc-box" style="padding: 1.5rem;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+          <p style="font-size: 0.8rem; font-weight: 700; color: var(--muted); text-transform: uppercase;">planet_rotation.py</p>
+          <button onclick="copyCode()" id="copyBtn" style="background: var(--accent); color: white; border: none; padding: 0.4rem 0.8rem; border-radius: 4px; cursor: pointer; font-size: 0.75rem; font-weight: 700;">Copy Code</button>
+        </div>
+        <div class="code-editor-container">
+          <textarea id="pythonScript" spellcheck="false">
+import bpy
+import math
+
+planet = bpy.data.objects.get("Sphere")
+
+if planet:
+    planet.animation_data_clear()
+    planet.rotation_euler[2] = 0
+    planet.keyframe_insert(data_path="rotation_euler", index=2, frame=1)
+    
+    planet.rotation_euler[2] = math.radians(360)
+    planet.keyframe_insert(data_path="rotation_euler", index=2, frame=250)
+
+    # Set interpolation to Linear
+    for fc in planet.animation_data.action.fcurves:
+        for kp in fc.keyframe_points:
+            kp.interpolation = 'LINEAR'
+          </textarea>
+        </div>
+      </div>
+    </div>
+
+    <!-- DEVELOPMENT LOG -->
     <div class="sec">
       <h2 class="sec-label">Development Log</h2>
       <div class="log-container" id="log-container"></div>
     </div>
   </div>
 
-  <footer>Gean Clyde H. Valdez · BSIT-S-2A</footer>
+  <footer style="border-top: 1px solid var(--border); padding: 3rem 2.5rem; text-align: center; font-size: 0.85rem; color: var(--muted); background-color: var(--surface);">
+    Gean Clyde H. Valdez · BSIT-S-2A
+  </footer>
 
   <script>
-  function calculate() {
-      const earthAge = document.getElementById('earthYears').value;
-      const grid = document.getElementById('planetGrid');
+    function calculate() {
+        const earthAge = document.getElementById('earthYears').value;
+        const grid = document.getElementById('planetGrid');
 
-      if (!earthAge || earthAge <= 0) {
-          grid.innerHTML = '<p style="color: var(--muted); font-size: 0.85rem; padding: 1rem;">Please enter a valid age.</p>';
-          return;
-      }
+        if (!earthAge || earthAge <= 0) {
+            grid.innerHTML = '<p style="color: var(--muted); font-size: 0.85rem; padding: 1rem;">Please enter a valid age.</p>';
+            return;
+        }
 
-      const planets = [
-          { name: "Mercury", period: 0.2408, emoji: "☿️" },
-          { name: "Venus", period: 0.6152, emoji: "♀️" },
-          { name: "Earth", period: 1.0000, emoji: "🌍" },
-          { name: "Mars", period: 1.8808, emoji: "♂️" },
-          { name: "Jupiter", period: 11.862, emoji: "♃" },
-          { name: "Saturn", period: 29.447, emoji: "♄" },
-          { name: "Uranus", period: 84.016, emoji: "⛢" },
-          { name: "Neptune", period: 164.79, emoji: "♆" }
-      ];
+        const planets = [
+            { name: "Mercury", period: 0.2408, emoji: "☿️" },
+            { name: "Venus", period: 0.6152, emoji: "♀️" },
+            { name: "Earth", period: 1.0000, emoji: "🌍" },
+            { name: "Mars", period: 1.8808, emoji: "♂️" },
+            { name: "Jupiter", period: 11.862, emoji: "♃" },
+            { name: "Saturn", period: 29.447, emoji: "♄" },
+            { name: "Uranus", period: 84.016, emoji: "⛢" },
+            { name: "Neptune", period: 164.79, emoji: "♆" }
+        ];
 
-      let html = '';
-      planets.forEach(planet => {
-          const planetAge = (earthAge / planet.period).toFixed(2);
+        let html = '';
+        planets.forEach(planet => {
+            const planetAge = (earthAge / planet.period).toFixed(2);
+            html += `
+                <div class="detail-card" style="animation: fadeUp 0.4s ease forwards; padding: 0; overflow: hidden; display: flex; flex-direction: column;">
+                  <video src="videos/${planet.name}.mp4" 
+                        onerror="this.onerror=null; this.src='videos/na.mp4';" 
+                        style="width: 100%; aspect-ratio: 16/9; object-fit: cover; background-color: #000; border-bottom: 1px solid var(--border);" 
+                        autoplay loop muted playsinline preload="auto">
+                  </video>
+                  <div style="padding: 1.5rem;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+                      <h3 style="margin: 0; color: var(--text); text-transform: none;">${planet.name}</h3>
+                      <span style="font-size: 1.2rem;">${planet.emoji}</span>
+                    </div>
+                    <p style="font-family: 'Noto Sans Mono', monospace; font-size: 1.1rem; font-weight: 700;">
+                      ${planetAge} <span style="font-size: 0.7rem; color: var(--muted);">years old</span>
+                    </p>
+                    <p style="font-size: 0.7rem; color: var(--muted); margin-top: 0.5rem; border-top: 1px solid var(--border); padding-top: 0.5rem;">
+                      1 Year = ${planet.period} Earth yrs
+                    </p>
+                  </div>
+                </div>`;
+        });
+        grid.innerHTML = html;
+    }
 
-          html += `
-            <div class="detail-card" style="animation: fadeUp 0.4s ease forwards; padding: 0; overflow: hidden; display: flex; flex-direction: column;">
-              <video src="videos/${planet.name}.mp4" 
-                    onerror="this.onerror=null; this.src='videos/na.mp4';" 
-                    style="width: 100%; aspect-ratio: 16/9; object-fit: cover; background-color: #000; border-bottom: 1px solid var(--border);" 
-                    autoplay loop muted playsinline preload="auto">
-              </video>
-              <div style="padding: 1.5rem;">
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
-                  <h3 style="margin: 0;">${planet.name}</h3>
-                  <span style="font-size: 1.2rem;">${planet.emoji}</span>
+    function copyCode() {
+        const copyText = document.getElementById("pythonScript");
+        copyText.select();
+        navigator.clipboard.writeText(copyText.value);
+        const btn = document.getElementById("copyBtn");
+        btn.innerText = "Copied!";
+        setTimeout(() => btn.innerText = "Copy Code", 2000);
+    }
+
+    // Dev Log Generation
+    const weeklyVideos = { 1: "videos/Earth.mp4", 2: "videos/Mercury.mp4", 3: "videos/Venus.mp4" };
+    const container = document.getElementById('log-container');
+    let logHTML = '';
+    for (let i = 1; i <= 12; i++) {
+        const videoPath = weeklyVideos[i] || "videos/na.mp4";
+        logHTML += `
+            <div class="week-entry">
+                <div class="week-meta"><span class="week-num">Week ${i}</span></div>
+                <div class="week-content">
+                    <div class="week-video-embed">
+                        <video style="width: 100%; height: 100%; background: #000; display: block;" autoplay loop muted playsinline preload="auto">
+                            <source src="${videoPath}" type="video/mp4">
+                        </video>
+                    </div>
                 </div>
-                <p style="font-family: 'Noto Sans Mono', monospace; font-size: 1.1rem; font-weight: 700;">
-                  ${planetAge} <span style="font-size: 0.7rem; color: var(--muted);">years old</span>
-                </p>
-                <p style="font-size: 0.7rem; color: var(--muted); margin-top: 0.5rem; border-top: 1px solid var(--border); padding-top: 0.5rem;">
-                  1 Year = ${planet.period} Earth yrs
-                </p>
-              </div>
-            </div>
-          `;
-      });
-      grid.innerHTML = html;
-  }
-
-  // Development Log Generation
-  const weeklyVideos = {
-      1: "videos/Earth.mp4",
-      2: "videos/Mercury.mp4"
-  };
-
-  const container = document.getElementById('log-container');
-  let logHTML = '';
-
-  for (let i = 1; i <= 12; i++) {
-      const videoPath = weeklyVideos[i] || "videos/na.mp4";
-      logHTML += `
-          <div class="week-entry">
-            <div class="week-meta">
-              <span class="week-num">Week ${i}</span>
-            </div>
-            <div class="week-content">
-              <div class="week-video-embed">
-                <video style="width: 100%; height: 100%; background-color: #000; display: block;" 
-                       autoplay loop muted playsinline preload="auto">
-                  <source src="${videoPath}" type="video/mp4">
-                  Your browser does not support the video tag.
-                </video>
-              </div>
-            </div>
-          </div>
-        `;
-  }
-
-  if (container) {
-      container.innerHTML = logHTML;
-  }
+            </div>`;
+    }
+    if (container) container.innerHTML = logHTML;
   </script>
 </body>
 </html>
