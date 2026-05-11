@@ -376,7 +376,7 @@
         </div>
 
         <div class="celestial-row">
-          <video class="celestial-vid" src="videos/na.mp4" autoplay loop muted playsinline preload="auto"></video>
+          <video class="celestial-vid" src="videos/Mars.mp4" autoplay loop muted playsinline preload="auto"></video>
           <div class="celestial-info">
             <h3>Mars</h3>
             <div class="celestial-meta">Terrestrial Planet • 4th from Sun</div>
@@ -385,7 +385,7 @@
         </div>
 
         <div class="celestial-row">
-          <video class="celestial-vid" src="videos/na.mp4" autoplay loop muted playsinline preload="auto"></video>
+          <video class="celestial-vid" src="videos/Jupiter.mp4" autoplay loop muted playsinline preload="auto"></video>
           <div class="celestial-info">
             <h3>Jupiter</h3>
             <div class="celestial-meta">Gas Giant • 5th from Sun</div>
@@ -394,7 +394,7 @@
         </div>
 
         <div class="celestial-row">
-          <video class="celestial-vid" src="videos/na.mp4" autoplay loop muted playsinline preload="auto"></video>
+          <video class="celestial-vid" src="videos/Saturn.mp4" autoplay loop muted playsinline preload="auto"></video>
           <div class="celestial-info">
             <h3>Saturn</h3>
             <div class="celestial-meta">Gas Giant • 6th from Sun</div>
@@ -450,6 +450,25 @@
             <li><a href="resources/2k_earth_daymap.jpg" download class="download-link">↓ 2k_earth_daymap.jpg</a></li>
             <li><a href="resources/2k_earth_normal_map.tif" download class="download-link">↓ 2k_earth_normal_map.tif</a></li>
             <li><a href="resources/2k_earth_specular_map.tif" download class="download-link">↓ 2k_earth_specular_map.tif</a></li>
+          </ul>
+        </div>
+        <div class="detail-card">
+          <h3>Mars</h3>
+          <ul>
+            <li><a href="resources/8k_mars.jpg" download class="download-link">↓ 8k_mars.jpg</a></li>
+          </ul>
+        </div>
+        <div class="detail-card">
+          <h3>Jupiter</h3>
+          <ul>
+            <li><a href="resources/8k_jupiter.jpg" download class="download-link">↓ 8k_jupiter.jpg</a></li>
+          </ul>
+        </div>
+        <div class="detail-card">
+          <h3>Saturn</h3>
+          <ul>
+            <li><a href="resources/8k_saturn.jpg" download class="download-link">↓ 8k_saturn.jpg</a></li>
+            <li><a href="resources/8k_saturn_ring_alpha.png" download class="download-link">↓ 8k_saturn_ring_alpha.jpg</a></li>
           </ul>
         </div>
       </div>
@@ -556,7 +575,7 @@ if planet:
     }
 
     // Dev Log Generation
-    const weeklyVideos = { 1: "videos/Earth.mp4", 2: "videos/Mercury.mp4", 3: "videos/Venus.mp4" };
+    const weeklyVideos = { 1: "videos/Earth.mp4", 2: "videos/Mercury.mp4", 3: "videos/Venus.mp4", 4: "videos/Mars.mp4", 5: "videos/Jupiter.mp4", 6: "videos/Saturn.mp4" };
     const container = document.getElementById('log-container');
     let logHTML = '';
     for (let i = 1; i <= 12; i++) {
